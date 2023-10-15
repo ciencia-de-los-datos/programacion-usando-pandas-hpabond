@@ -66,21 +66,24 @@ def pregunta_09():
     return tbl0[['_c0', '_c1', '_c2', '_c3', 'year']]
 
 
-
 def pregunta_10():
-  
-    tbl0['_c2'] = tbl0['_c2'].astype(int)
-    result = tbl0.groupby('_c1')['_c2'].agg(lambda x: ':'.join(map(str, sorted(x)))).reset_index()
-    result = result.sort_values(by='_c1', ascending=True)
+
+    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
+
+    result = tbl0.groupby('_c1')['_c2'].apply(lambda x: ':'.join(map(str, sorted(x)))).reset_index()
+
+    result = result.sort_values(by='_c1')
+
     return result
 
 
+resultado = pregunta_10()
+print(resultado)
 
 
 def pregunta_11():
     result = tbl1.groupby('_c0')['_c4'].apply(lambda x: ','.join(sorted(x))).reset_index()
     return result
-
 
 
 
