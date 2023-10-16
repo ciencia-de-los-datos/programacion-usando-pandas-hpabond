@@ -67,18 +67,11 @@ def pregunta_09():
 
 
 def pregunta_10():
-
-    tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
-
     result = tbl0.groupby('_c1')['_c2'].apply(lambda x: ':'.join(map(str, sorted(x)))).reset_index()
-
-    result = result.sort_values(by='_c1')
-
+    result.set_index('_c1', inplace=True)
     return result
 
 
-resultado = pregunta_10()
-print(resultado)
 
 
 def pregunta_11():
